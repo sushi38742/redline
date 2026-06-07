@@ -52,8 +52,9 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-2">
-            {PRINCIPLES.map((p) => (
-              <div className="card" key={p.title}>
+            {PRINCIPLES.map((p, i) => (
+              <div className="card principle" key={p.title}>
+                <span className="principle-tag">{String(i + 1).padStart(2, '0')}</span>
                 <h3>{p.title}</h3>
                 <p>{p.body}</p>
               </div>
@@ -75,8 +76,20 @@ export default function Home() {
           </div>
           <div className="grid grid-3">
             {CHECK_CATALOG.map((c) => (
-              <div className="card" key={c.id}>
-                <div className="icon">{c.icon}</div>
+              <div
+                className="card check-card"
+                key={c.id}
+                style={{ '--accent': c.accent }}
+              >
+                <div
+                  className="icon"
+                  style={{
+                    background: `linear-gradient(135deg, ${c.accent}33, ${c.accent}11)`,
+                    boxShadow: `inset 0 0 0 1px ${c.accent}40`,
+                  }}
+                >
+                  {c.icon}
+                </div>
                 <h3>{c.title}</h3>
                 <p>{c.summary}</p>
               </div>

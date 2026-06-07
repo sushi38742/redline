@@ -6,6 +6,7 @@ export const CHECK_CATALOG = [
   {
     id: 'secrets',
     icon: '🔑',
+    accent: '#ff3b6b',
     title: 'Secret & API key exposure',
     summary:
       'Public HTML, JavaScript, source maps, static assets and common config files are checked for known provider key formats. Secrets are redacted and never validated.',
@@ -13,6 +14,7 @@ export const CHECK_CATALOG = [
   {
     id: 'ai',
     icon: '🤖',
+    accent: '#a06bff',
     title: 'AI app risk',
     summary:
       'Frontend provider URLs, public AI routes, prompt-template hints, permissive CORS and paid-usage endpoints are reviewed as launch risks.',
@@ -20,6 +22,7 @@ export const CHECK_CATALOG = [
   {
     id: 'env',
     icon: '📄',
+    accent: '#ff7a45',
     title: 'Public environment files',
     summary:
       'Safe public signals for exposed .env and config files are classified by severity and confidence with practical remediation — never exploited.',
@@ -27,6 +30,7 @@ export const CHECK_CATALOG = [
   {
     id: 'sourcemaps',
     icon: '🗺️',
+    accent: '#ffb020',
     title: 'Source maps',
     summary:
       'Publicly reachable .map files that leak original source are flagged with severity, confidence and evidence.',
@@ -34,6 +38,7 @@ export const CHECK_CATALOG = [
   {
     id: 'files',
     icon: '🗂️',
+    accent: '#2fd4b6',
     title: 'Public file exposure',
     summary:
       'Common sensitive paths (backups, dumps, VCS folders, admin artifacts) are checked as safe public signals only.',
@@ -41,6 +46,7 @@ export const CHECK_CATALOG = [
   {
     id: 'api',
     icon: '🔌',
+    accent: '#4aa3ff',
     title: 'API surface review',
     summary:
       'Discoverable API routes, docs and schemas are reviewed for unintended exposure without sending destructive requests.',
@@ -48,6 +54,7 @@ export const CHECK_CATALOG = [
   {
     id: 'cors',
     icon: '🌐',
+    accent: '#34c3ff',
     title: 'CORS configuration',
     summary:
       'Access-Control headers are reviewed for overly permissive origins and credentialed wildcards.',
@@ -55,6 +62,7 @@ export const CHECK_CATALOG = [
   {
     id: 'headers',
     icon: '🛡️',
+    accent: '#2fd47b',
     title: 'Security headers',
     summary:
       'HSTS, CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy and Permissions-Policy are evaluated against the baseline.',
@@ -62,6 +70,7 @@ export const CHECK_CATALOG = [
   {
     id: 'tls',
     icon: '🔒',
+    accent: '#5b8cff',
     title: 'HTTPS / TLS',
     summary:
       'HTTPS availability, redirects and certificate validity signals are checked. Plaintext or broken redirects are flagged.',
@@ -69,6 +78,7 @@ export const CHECK_CATALOG = [
   {
     id: 'dns',
     icon: '📬',
+    accent: '#ff5fa2',
     title: 'DNS and email posture',
     summary:
       'SPF, DMARC, DKIM hints, CAA and dangling-record signals are reviewed for spoofing and takeover risk.',
@@ -76,6 +86,7 @@ export const CHECK_CATALOG = [
   {
     id: 'fingerprint',
     icon: '🧩',
+    accent: '#9b8bff',
     title: 'CMS / framework fingerprinting',
     summary:
       'Public signals identify the CMS, framework and notable libraries to contextualize other findings.',
@@ -83,6 +94,7 @@ export const CHECK_CATALOG = [
   {
     id: 'wordpress',
     icon: '📰',
+    accent: '#34c3ff',
     title: 'WordPress checks',
     summary:
       'When WordPress is detected, exposed REST user enumeration, readme version leaks and login surface are reviewed safely.',
@@ -90,6 +102,7 @@ export const CHECK_CATALOG = [
   {
     id: 'ratelimit',
     icon: '⏱️',
+    accent: '#ffb020',
     title: 'Rate limiting & abuse resistance',
     summary:
       'Strict safe request limits record repeated-request handling only. No load testing and no DDoS claims.',
@@ -97,6 +110,7 @@ export const CHECK_CATALOG = [
   {
     id: 'performance',
     icon: '⚡',
+    accent: '#ffd23f',
     title: 'Performance and stability',
     summary:
       'Response timing, compression and caching signals are sampled within safe request limits.',
@@ -104,6 +118,7 @@ export const CHECK_CATALOG = [
   {
     id: 'privacy',
     icon: '👁️',
+    accent: '#2fd4b6',
     title: 'Privacy and tracking signals',
     summary:
       'Third-party trackers, cookie flags and analytics beacons are inventoried as privacy posture signals.',
@@ -111,6 +126,7 @@ export const CHECK_CATALOG = [
   {
     id: 'badge',
     icon: '🎖️',
+    accent: '#ff3b6b',
     title: 'Badge eligibility',
     summary:
       'A domain that passes the published baseline at scan time becomes eligible for the Redline verified badge.',

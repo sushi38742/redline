@@ -5,7 +5,9 @@ import {
   runScan,
   normalizeDomain,
   isValidDomain,
+  EngineUnavailableError,
 } from '../lib/api.js'
+import { clientScan } from '../lib/clientScan.js'
 import Finding from './Finding.jsx'
 import { SEVERITY_ORDER } from '../lib/catalog.js'
 
@@ -41,7 +43,27 @@ export default function Scanner() {
       const data = await startVerification(clean)
       setToken(data.token)
     } catch (err) {
+      if (err instanceof EngineUnavailableError) {
+        // No backend: run the DNS-only browser preview instead.
+        await runClientPreview()
+        return
+      }
       setError(err.message)
+      setStage('idle')
+    }
+  }
+
+  async function runClientPreview() {
+    setStage('scanning')
+    try {
+      const data = await clientScan(clean)
+      setResult(data)
+      setStage('done')
+      setNotice(
+        'Scan engine offline — ran a DNS-only preview in your browser. Start the Redline engine for the full non-destructive baseline.',
+      )
+    } catch (err) {
+      setError('Preview scan failed: ' + err.message)
       setStage('idle')
     }
   }
@@ -74,6 +96,10 @@ export default function Scanner() {
       setResult(data)
       setStage('done')
     } catch (err) {
+      if (err instanceof EngineUnavailableError) {
+        await runClientPreview()
+        return
+      }
       setError(err.message)
       setStage('verified')
     }

@@ -1,17 +1,28 @@
 // Thin client for the Redline scan engine.
 
+// Raised when the backend scan engine isn't reachable (e.g. the site is hosted
+// as a static build with no API). Callers can fall back to a client-side scan.
+export class EngineUnavailableError extends Error {}
+
 async function post(path, body) {
-  const res = await fetch(path, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  })
-  let data
+  let res
   try {
-    data = await res.json()
+    res = await fetch(path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
   } catch {
-    throw new Error(`Unexpected response from scan engine (${res.status})`)
+    throw new EngineUnavailableError('Scan engine is not reachable.')
   }
+  // A static host answers /api/* with an HTML 404 — not JSON.
+  const ct = res.headers.get('content-type') || ''
+  if (!ct.includes('application/json')) {
+    throw new EngineUnavailableError(
+      `Scan engine not running (HTTP ${res.status}).`,
+    )
+  }
+  const data = await res.json()
   if (!res.ok) {
     throw new Error(data?.error || `Request failed (${res.status})`)
   }
