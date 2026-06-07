@@ -37,8 +37,8 @@ export function checkVerification(domain, method) {
   return post('/api/verify/check', { domain, method })
 }
 
-export function runScan(domain) {
-  return post('/api/scan', { domain })
+export function runScan(domain, checks) {
+  return post('/api/scan', { domain, checks })
 }
 
 // Normalize whatever the user typed into a bare hostname.

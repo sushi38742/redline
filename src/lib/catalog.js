@@ -133,6 +133,40 @@ export const CHECK_CATALOG = [
   },
 ]
 
+// Tests a user can pick (everything except the derived 'badge' status).
+export const RUNNABLE_CHECKS = CHECK_CATALOG.filter((c) => c.id !== 'badge')
+
+// Heavier checks that fetch multiple assets/paths — flagged in the picker.
+export const INTENSIVE_CHECKS = new Set(['secrets', 'api', 'files', 'env'])
+
+// Plain-English narration shown live while each test runs.
+export const LIVE_COPY = {
+  tls: 'Knocking on http:// and https:// to make sure traffic is encrypted and plaintext gets redirected away.',
+  headers:
+    'Reading your response headers — checking for HSTS, a Content-Security-Policy, nosniff, clickjacking protection and friends.',
+  cors: 'Pretending to be a stranger’s website and asking your server if it’ll share data. Hoping it says no.',
+  secrets:
+    'Reading your homepage and its scripts the way anyone could, scanning for anything shaped like a live API key — OpenAI, Anthropic, Stripe, AWS. Found ones are redacted, never tested.',
+  sourcemaps:
+    'Looking for source maps that would hand your original, un-minified code to the public.',
+  fingerprint:
+    'Working out what built your site — the CMS, framework and libraries — so the other findings make sense.',
+  ai: 'Hunting for AI wiring left in the frontend: provider URLs, public chat routes and prompt templates that should live on a server.',
+  privacy:
+    'Taking inventory of trackers and checking your cookies for the Secure and HttpOnly flags.',
+  performance:
+    'Timing the homepage and checking whether compression and caching are switched on.',
+  env: 'Politely asking for common files like .env and .env.production — they should never answer.',
+  files:
+    'Checking a short list of paths that leak data when left public: .git, backups, database dumps.',
+  api: 'Looking for discoverable API entry points, schemas and introspection that probably shouldn’t be open.',
+  dns: 'Querying your DNS for SPF, DMARC and CAA records — the things that stop people spoofing your email and certs.',
+  wordpress:
+    'If this is WordPress, checking the usual soft spots: REST user enumeration and version-leaking readme files.',
+  ratelimit:
+    'Sending a tiny, safe handful of repeat requests just to observe how repeats are handled. No load testing, ever.',
+}
+
 export const PRINCIPLES = [
   {
     title: 'Controlled',

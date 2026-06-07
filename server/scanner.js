@@ -24,27 +24,35 @@ const ENV_PATHS = ['.env', '.env.local', '.env.production', '.env.development']
 const FILE_PATHS = ['.git/config', '.git/HEAD', 'backup.zip', 'db.sql', 'dump.sql', '.DS_Store', 'config.json', 'wp-config.php.bak']
 const API_PATHS = ['robots.txt', 'sitemap.xml', 'openapi.json', 'swagger.json', 'api', 'graphql', '.well-known/security.txt']
 
-export async function scan(domain) {
+export async function scan(domain, options = {}) {
   const started = Date.now()
   const budget = createBudget(45)
   const findings = []
   const ctx = {}
 
-  // Baseline homepage fetch over HTTPS.
-  const home = await safeFetch(`https://${domain}/`, { budget })
+  // Which test categories to run. Empty/undefined = run them all.
+  const sel = Array.isArray(options.checks) && options.checks.length
+    ? new Set(options.checks)
+    : null
+  const want = (id) => !sel || sel.has(id)
+  const requested = sel ? [...sel] : ALL_CHECK_IDS
+
+  // Baseline homepage fetch over HTTPS (needed by any HTTP-based check).
+  const needsHome = !sel || [...sel].some((id) => HTTP_CHECKS.has(id))
+  const home = needsHome ? await safeFetch(`https://${domain}/`, { budget }) : { ok: false }
   ctx.home = home
 
-  await checkTLS(domain, home, findings, budget)
+  if (want('tls')) await checkTLS(domain, home, findings, budget)
   if (home.ok) {
-    checkHeaders(home, findings)
-    await checkCORS(domain, findings, budget)
-    await checkSecrets(domain, home, findings, budget)
-    checkSourceMaps(home, findings)
-    checkFingerprint(home, findings, ctx)
-    checkAIRisk(home, findings)
-    checkPrivacy(home, findings)
-    checkPerformance(home, findings)
-  } else {
+    if (want('headers')) checkHeaders(home, findings)
+    if (want('cors')) await checkCORS(domain, findings, budget)
+    if (want('secrets')) await checkSecrets(domain, home, findings, budget)
+    if (want('sourcemaps')) checkSourceMaps(home, findings)
+    if (want('fingerprint') || want('wordpress')) checkFingerprint(home, findings, ctx)
+    if (want('ai')) checkAIRisk(home, findings)
+    if (want('privacy')) checkPrivacy(home, findings)
+    if (want('performance')) checkPerformance(home, findings)
+  } else if (needsHome) {
     findings.push(
       finding('HTTPS / TLS', 'Site did not respond over HTTPS', 'high', {
         confidence: 'high',
@@ -54,14 +62,14 @@ export async function scan(domain) {
     )
   }
 
-  await checkEnvFiles(domain, findings, budget)
-  await checkPublicFiles(domain, findings, budget)
-  await checkApiSurface(domain, findings, budget)
-  await checkDNS(domain, findings)
-  if (ctx.wordpress) await checkWordPress(domain, findings, budget)
-  await checkRateLimit(domain, findings, budget)
+  if (want('env')) await checkEnvFiles(domain, findings, budget)
+  if (want('files')) await checkPublicFiles(domain, findings, budget)
+  if (want('api')) await checkApiSurface(domain, findings, budget)
+  if (want('dns')) await checkDNS(domain, findings)
+  if (want('wordpress') && ctx.wordpress) await checkWordPress(domain, findings, budget)
+  if (want('ratelimit')) await checkRateLimit(domain, findings, budget)
 
-  const checksRun = new Set(findings.map((f) => f.category)).size
+  const checksRun = requested.length
   const hasBlocker = findings.some(
     (f) => f.severity === 'critical' || f.severity === 'high',
   )
@@ -72,10 +80,22 @@ export async function scan(domain) {
     durationMs: Date.now() - started,
     requestsUsed: budget.used,
     checksRun,
-    badgeEligible: home.ok && !hasBlocker,
+    checksRequested: requested,
+    partial: Boolean(sel),
+    badgeEligible: home.ok && !hasBlocker && !sel,
     findings,
   }
 }
+
+// Categories that require fetching the site over HTTP(S).
+const HTTP_CHECKS = new Set([
+  'tls', 'headers', 'cors', 'secrets', 'sourcemaps', 'fingerprint',
+  'ai', 'privacy', 'performance', 'env', 'files', 'api', 'wordpress', 'ratelimit',
+])
+const ALL_CHECK_IDS = [
+  'tls', 'headers', 'cors', 'secrets', 'sourcemaps', 'fingerprint', 'ai',
+  'privacy', 'performance', 'env', 'files', 'api', 'dns', 'wordpress', 'ratelimit',
+]
 
 // ---------------- HTTPS / TLS ----------------
 async function checkTLS(domain, home, findings, budget) {

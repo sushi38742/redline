@@ -71,8 +71,12 @@ export async function runScan(body, { allowUnverified = false } = {}) {
     }
   }
 
+  const checks = Array.isArray(body?.checks)
+    ? body.checks.filter((c) => typeof c === 'string').slice(0, 20)
+    : undefined
+
   try {
-    const result = await scan(domain)
+    const result = await scan(domain, { checks })
     result.aiSummary = await summarizeFindings(domain, result.findings)
     return { status: 200, body: result }
   } catch (err) {
