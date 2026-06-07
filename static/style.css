@@ -1,0 +1,49 @@
+/* Redline custom styles — layered on the Bootstrap dark agent theme. */
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.navbar {
+  backdrop-filter: blur(8px);
+}
+
+.card {
+  transition: box-shadow 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+.card.shadow-sm:hover {
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Selectable test rows */
+.test-option {
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+.test-option:hover {
+  border-color: var(--bs-primary) !important;
+}
+.test-option:has(.test-check:checked) {
+  border-color: var(--bs-primary) !important;
+  background-color: rgba(var(--bs-primary-rgb), 0.08);
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Loading modal rings */
+.loading-rings {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.loading-rings .spinner-border {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+code {
+  color: var(--bs-warning);
+}

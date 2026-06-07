@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Endorsement — Redline{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 920px;">
+
+  <div class="text-center mb-5">
+    <i class="bi bi-patch-check-fill text-warning" style="font-size: 3rem;"></i>
+    <h1 class="fw-bold mt-2">Security Endorsement Program</h1>
+    <p class="text-secondary fs-5">Performance-based recognition for secure websites.</p>
+  </div>
+
+  <div class="card border-secondary-subtle shadow-sm mb-4">
+    <div class="card-header bg-transparent border-secondary-subtle d-flex align-items-center gap-2">
+      <i class="bi bi-shield-check text-primary fs-5"></i>
+      <h5 class="mb-0">Endorsement Criteria &amp; Testing Standards</h5>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info d-flex gap-2">
+        <i class="bi bi-info-circle-fill"></i>
+        <div>
+          <strong>Important Disclaimer:</strong> A Redline endorsement is a voluntary,
+          performance-based recognition granted to websites that pass our simulation-based tests.
+          It does <strong>not</strong> constitute a formal security audit, regulatory certification,
+          or guarantee of protection. We are not a penetration-testing service, nor do we certify
+          compliance with any governmental or industry-specific standard.
+        </div>
+      </div>
+
+      <h6 class="text-uppercase small fw-bold text-secondary mb-3">Testing criteria for endorsement</h6>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card h-100 border-secondary-subtle">
+            <div class="card-header text-bg-success fw-semibold">Performance &amp; Availability</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent"><i class="bi bi-check2-circle text-success me-2"></i>Survives a burst of rapid requests</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-check2-circle text-success me-2"></i>Responsive average load time</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-check2-circle text-success me-2"></i>Rate limiting on rapid traffic</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100 border-secondary-subtle">
+            <div class="card-header text-bg-primary fw-semibold">Transport &amp; Browser Protection</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent"><i class="bi bi-shield-check text-primary me-2"></i>Valid HTTPS with HTTP→HTTPS redirect</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-shield-check text-primary me-2"></i>Core security headers configured</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-shield-check text-primary me-2"></i>Clickjacking &amp; secure-cookie protection</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100 border-secondary-subtle">
+            <div class="card-header text-bg-warning fw-semibold">Injection &amp; Input Handling</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent"><i class="bi bi-bug text-warning me-2"></i>No reflected SQL errors</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-bug text-warning me-2"></i>No reflected XSS payloads</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-bug text-warning me-2"></i>No open-redirect behaviour</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100 border-secondary-subtle">
+            <div class="card-header text-bg-info fw-semibold">Access &amp; API Surface</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item bg-transparent"><i class="bi bi-door-closed text-info me-2"></i>No exposed sensitive paths</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-door-closed text-info me-2"></i>Safe CORS configuration</li>
+              <li class="list-group-item bg-transparent"><i class="bi bi-door-closed text-info me-2"></i>CSRF protection on forms</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-secondary mt-4 d-flex gap-2 mb-0">
+        <i class="bi bi-clipboard-check"></i>
+        <div>
+          <strong>Overall:</strong> a site must pass <strong>every selected test</strong> with zero
+          failures to earn the endorsement. Endorsement reflects the result at the time of testing
+          and can be revoked if the site no longer passes.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h6 class="text-uppercase small fw-bold text-secondary mb-3">Endorsement benefits</h6>
+  <div class="row g-3 text-center mb-5">
+    <div class="col-md-4">
+      <div class="card border-secondary-subtle h-100 py-3">
+        <i class="bi bi-patch-check text-success fs-1"></i>
+        <h6 class="mt-2">Recognition</h6>
+        <p class="text-secondary small px-3">Display an endorsement badge showing your site passed our testing criteria.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-secondary-subtle h-100 py-3">
+        <i class="bi bi-shield-lock text-primary fs-1"></i>
+        <h6 class="mt-2">Customer trust</h6>
+        <p class="text-secondary small px-3">Show visitors your site meets our simulation-based test standards.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-secondary-subtle h-100 py-3">
+        <i class="bi bi-graph-up-arrow text-warning fs-1"></i>
+        <h6 class="mt-2">Business value</h6>
+        <p class="text-secondary small px-3">Demonstrate a commitment to security best practices.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mb-4">
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+      <i class="bi bi-play-circle me-1"></i>Test my site
+    </a>
+  </div>
+</div>
+{% endblock %}

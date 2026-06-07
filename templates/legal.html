@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Legal — Redline{% endblock %}
+{% block content %}
+<div class="container" style="max-width: 820px;">
+  <div class="text-center mb-5">
+    <i class="bi bi-file-earmark-text text-warning" style="font-size: 3rem;"></i>
+    <h1 class="fw-bold mt-2">Legal &amp; Disclaimers</h1>
+    <p class="text-secondary">Please read carefully before testing any website.</p>
+  </div>
+
+  <div class="card border-secondary-subtle shadow-sm">
+    <div class="card-body">
+
+      <h5><i class="bi bi-exclamation-circle text-warning me-2"></i>Not a security certification</h5>
+      <p class="text-secondary">
+        A Redline endorsement is performance-based recognition, not a security certification.
+        It does not constitute a security audit or guarantee of security. It reflects passing our
+        specific simulation-based tests at the time of testing and nothing more.
+      </p>
+
+      <h5 class="mt-4"><i class="bi bi-shield-slash text-warning me-2"></i>Simulation-based &amp; non-destructive</h5>
+      <p class="text-secondary">
+        All Redline tests are simulation-based and non-destructive. They observe publicly available
+        behaviour using a small number of safe requests. Redline does not exploit vulnerabilities,
+        bypass authentication, brute force credentials, perform load testing, or run destructive tests.
+      </p>
+
+      <h5 class="mt-4"><i class="bi bi-person-check text-warning me-2"></i>Authorization required</h5>
+      <p class="text-secondary">
+        You must own, or have explicit written authorization to test, any domain you submit. Domain
+        ownership verification is required before any test runs. Testing systems you are not authorized
+        to test may be illegal.
+      </p>
+
+      <h5 class="mt-4"><i class="bi bi-slash-circle text-warning me-2"></i>Limitation of liability</h5>
+      <p class="text-secondary">
+        Redline is provided “as is”, without warranty of any kind. Redline is not liable for any
+        issues, damages, downtime, or losses arising from testing or from reliance on test results.
+      </p>
+
+      <h5 class="mt-4"><i class="bi bi-arrow-counterclockwise text-warning me-2"></i>Revocation</h5>
+      <p class="text-secondary mb-0">
+        An endorsement can be revoked at any time if a site no longer passes the tests, or if the
+        endorsement is misused. Re-test at any time to confirm current status.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}
