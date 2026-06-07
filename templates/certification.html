@@ -15,101 +15,131 @@
       <h5 class="mb-0">Endorsement Criteria &amp; Testing Standards</h5>
     </div>
     <div class="card-body">
-      <div class="alert alert-info d-flex gap-2">
-        <i class="bi bi-info-circle-fill"></i>
+
+      <div class="alert alert-info d-flex gap-2 mb-4">
+        <i class="bi bi-info-circle-fill flex-shrink-0 mt-1"></i>
         <div>
-          <strong>Important Disclaimer:</strong> A Redline endorsement is a voluntary,
-          performance-based recognition granted to websites that pass our simulation-based tests.
-          It does <strong>not</strong> constitute a formal security audit, regulatory certification,
-          or guarantee of protection. We are not a penetration-testing service, nor do we certify
-          compliance with any governmental or industry-specific standard.
+          <strong>Important Disclaimer:</strong> Redline endorsement is a voluntary performance-based
+          recognition granted to websites that pass our simulation-based testing criteria. This
+          endorsement does <strong>not</strong> constitute a formal security audit, regulatory
+          certification, or guarantee of protection. We are not a penetration testing service,
+          nor do we certify compliance with governmental or industry-specific security standards.
         </div>
       </div>
 
-      <h6 class="text-uppercase small fw-bold text-secondary mb-3">Testing criteria for endorsement</h6>
-      <div class="row g-3">
+      <h6 class="d-flex align-items-center gap-2 mb-3">
+        <i class="bi bi-list-check"></i>Testing Criteria for Endorsement
+      </h6>
+
+      <div class="row g-3 mb-4">
         <div class="col-md-6">
           <div class="card h-100 border-secondary-subtle">
-            <div class="card-header text-bg-success fw-semibold">Performance &amp; Availability</div>
+            <div class="card-header fw-semibold" style="background:rgba(25,135,84,0.85);color:#fff;">Performance Standards</div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-transparent"><i class="bi bi-check2-circle text-success me-2"></i>Survives a burst of rapid requests</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-check2-circle text-success me-2"></i>Responsive average load time</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-check2-circle text-success me-2"></i>Rate limiting on rapid traffic</li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-check2-circle text-success"></i>Load test success rate: <strong>&ge;98%</strong>
+              </li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-check2-circle text-success"></i>Average response time: <strong>&le;500ms</strong>
+              </li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-check2-circle text-success"></i>Zero critical performance failures
+              </li>
             </ul>
           </div>
         </div>
         <div class="col-md-6">
           <div class="card h-100 border-secondary-subtle">
-            <div class="card-header text-bg-primary fw-semibold">Transport &amp; Browser Protection</div>
+            <div class="card-header fw-semibold" style="background:rgba(111,66,193,0.85);color:#fff;">Security Standards</div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-transparent"><i class="bi bi-shield-check text-primary me-2"></i>Valid HTTPS with HTTP→HTTPS redirect</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-shield-check text-primary me-2"></i>Core security headers configured</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-shield-check text-primary me-2"></i>Clickjacking &amp; secure-cookie protection</li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-primary"></i>Zero SQL injection vulnerabilities
+              </li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-primary"></i>Zero XSS vulnerabilities detected
+              </li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-primary"></i>Proper security headers configured
+              </li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-primary"></i>Admin areas properly protected
+              </li>
             </ul>
           </div>
         </div>
         <div class="col-md-6">
           <div class="card h-100 border-secondary-subtle">
-            <div class="card-header text-bg-warning fw-semibold">Injection &amp; Input Handling</div>
+            <div class="card-header fw-semibold" style="background:rgba(163,119,0,0.85);color:#fff;">Rate Limiting</div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-transparent"><i class="bi bi-bug text-warning me-2"></i>No reflected SQL errors</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-bug text-warning me-2"></i>No reflected XSS payloads</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-bug text-warning me-2"></i>No open-redirect behaviour</li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-hourglass-split text-warning"></i>Effective rate limiting: <strong>&ge;80% blocked</strong>
+              </li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-hourglass-split text-warning"></i>DDoS protection active
+              </li>
             </ul>
           </div>
         </div>
         <div class="col-md-6">
           <div class="card h-100 border-secondary-subtle">
-            <div class="card-header text-bg-info fw-semibold">Access &amp; API Surface</div>
+            <div class="card-header fw-semibold" style="background:rgba(13,202,240,0.25);color:var(--bs-info);">Overall Assessment</div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item bg-transparent"><i class="bi bi-door-closed text-info me-2"></i>No exposed sensitive paths</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-door-closed text-info me-2"></i>Safe CORS configuration</li>
-              <li class="list-group-item bg-transparent"><i class="bi bi-door-closed text-info me-2"></i>CSRF protection on forms</li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-patch-check text-info"></i>Pass <strong>ALL</strong> selected security tests
+              </li>
+              <li class="list-group-item bg-transparent d-flex align-items-center gap-2">
+                <i class="bi bi-patch-check text-info"></i>Zero critical security issues
+              </li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="alert alert-secondary mt-4 d-flex gap-2 mb-0">
-        <i class="bi bi-clipboard-check"></i>
+      <div class="alert alert-secondary d-flex gap-2 mb-0">
+        <i class="bi bi-clipboard-check flex-shrink-0 mt-1"></i>
         <div>
-          <strong>Overall:</strong> a site must pass <strong>every selected test</strong> with zero
-          failures to earn the endorsement. Endorsement reflects the result at the time of testing
-          and can be revoked if the site no longer passes.
+          <strong>Testing Standards:</strong> Our simulation-based tests include non-destructive
+          load tests, rate limit verification, input validation scans, and header analysis.
+          Only approximately <strong>5–15%</strong> of websites typically pass all tests on their
+          first attempt.
         </div>
       </div>
     </div>
   </div>
 
-  <h6 class="text-uppercase small fw-bold text-secondary mb-3">Endorsement benefits</h6>
+  <!-- Benefits -->
+  <h6 class="d-flex align-items-center gap-2 text-secondary text-uppercase small fw-bold mb-3">
+    <i class="bi bi-patch-check"></i>Endorsement Benefits
+  </h6>
   <div class="row g-3 text-center mb-5">
     <div class="col-md-4">
-      <div class="card border-secondary-subtle h-100 py-3">
+      <div class="card border-secondary-subtle h-100 py-4">
         <i class="bi bi-patch-check text-success fs-1"></i>
-        <h6 class="mt-2">Recognition</h6>
-        <p class="text-secondary small px-3">Display an endorsement badge showing your site passed our testing criteria.</p>
+        <h6 class="mt-2 fw-bold">Performance Recognition</h6>
+        <p class="text-secondary small px-3 mb-0">Display endorsement badge showing your site passed our testing criteria.</p>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card border-secondary-subtle h-100 py-3">
+      <div class="card border-secondary-subtle h-100 py-4">
         <i class="bi bi-shield-lock text-primary fs-1"></i>
-        <h6 class="mt-2">Customer trust</h6>
-        <p class="text-secondary small px-3">Show visitors your site meets our simulation-based test standards.</p>
+        <h6 class="mt-2 fw-bold">Customer Trust</h6>
+        <p class="text-secondary small px-3 mb-0">Show visitors your site meets our simulation-based test standards.</p>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card border-secondary-subtle h-100 py-3">
+      <div class="card border-secondary-subtle h-100 py-4">
         <i class="bi bi-graph-up-arrow text-warning fs-1"></i>
-        <h6 class="mt-2">Business value</h6>
-        <p class="text-secondary small px-3">Demonstrate a commitment to security best practices.</p>
+        <h6 class="mt-2 fw-bold">Business Value</h6>
+        <p class="text-secondary small px-3 mb-0">Demonstrate commitment to security best practices.</p>
       </div>
     </div>
   </div>
 
-  <div class="text-center mb-4">
-    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
-      <i class="bi bi-play-circle me-1"></i>Test my site
+  <div class="text-center mb-5">
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg px-5">
+      <i class="bi bi-play-circle me-2"></i>Start Endorsement Testing
     </a>
   </div>
+
 </div>
 {% endblock %}
