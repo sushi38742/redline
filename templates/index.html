@@ -1,158 +1,47 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container" style="max-width: 860px;">
 
-<!-- Hero -->
-<div class="container text-center py-5" style="max-width: 800px;">
-  <i class="bi bi-award text-warning" style="font-size: 4rem;"></i>
-  <h1 class="display-4 fw-bold mt-3 mb-2">Your site either passes or it doesn't.</h1>
-  <p class="fs-5 text-secondary mb-3">
-    Redline runs real, non-destructive security and performance tests against your domain —
-    then tells you exactly where you stand. No scores. No fluff. Just results.
-  </p>
-  <p class="text-secondary mb-4">
-    Built for AI-generated sites, indie projects, and anyone who ships fast and needs to know
-    their stack isn't quietly leaking data, misfiring headers, or exposed to basic attacks.
-  </p>
-  <div class="d-flex justify-content-center gap-3 flex-wrap">
-    <span class="badge bg-secondary-subtle border border-secondary-subtle text-secondary px-3 py-2">
-      <i class="bi bi-shield-check me-1"></i>12 real checks
-    </span>
-    <span class="badge bg-secondary-subtle border border-secondary-subtle text-secondary px-3 py-2">
-      <i class="bi bi-lock me-1"></i>Non-destructive
-    </span>
-    <span class="badge bg-secondary-subtle border border-secondary-subtle text-secondary px-3 py-2">
-      <i class="bi bi-award me-1"></i>Earn the endorsement
-    </span>
+  <!-- Hero -->
+  <div class="text-center mb-5">
+    <i class="bi bi-award text-warning" style="font-size: 3rem;"></i>
+    <h1 class="display-5 fw-bold mt-2">Redline</h1>
+    <p class="text-secondary fs-5 mb-1">Website Security Testing &amp; Endorsement</p>
+    <p class="text-secondary">Enter a domain to test security and performance</p>
   </div>
-</div>
 
-<!-- How it works -->
-<div class="container mb-5" style="max-width: 980px;">
-  <div class="row g-3 text-center">
-    <div class="col-md-4">
-      <div class="card border-secondary-subtle h-100 p-3">
-        <div class="card-body">
-          <i class="bi bi-globe text-primary fs-2 mb-3 d-block"></i>
-          <h6 class="fw-bold">1. Verify your domain</h6>
-          <p class="text-secondary small mb-0">
-            Drop one meta tag into your <code>&lt;head&gt;</code>. Proves you own what you're testing.
-            Takes 30 seconds.
-          </p>
-        </div>
-      </div>
+  <!-- Website Testing card -->
+  <div class="card border-secondary-subtle shadow-sm mb-4">
+    <div class="card-header bg-transparent border-secondary-subtle d-flex align-items-center gap-2 py-3">
+      <i class="bi bi-play-circle text-primary fs-4"></i>
+      <h4 class="mb-0 fw-bold">Website Testing</h4>
     </div>
-    <div class="col-md-4">
-      <div class="card border-secondary-subtle h-100 p-3">
-        <div class="card-body">
-          <i class="bi bi-list-check text-warning fs-2 mb-3 d-block"></i>
-          <h6 class="fw-bold">2. Pick your tests</h6>
-          <p class="text-secondary small mb-0">
-            Choose from 12 security and performance checks across 4 categories.
-            Run a focused set or go all-in for the full endorsement.
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card border-secondary-subtle h-100 p-3">
-        <div class="card-body">
-          <i class="bi bi-patch-check text-success fs-2 mb-3 d-block"></i>
-          <h6 class="fw-bold">3. Earn the endorsement</h6>
-          <p class="text-secondary small mb-0">
-            Pass every selected test and you get the Redline endorsement badge — proof your
-            site held up under scrutiny.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- What we test -->
-<div class="container mb-5" style="max-width: 980px;">
-  <div class="card border-secondary-subtle shadow-sm">
-    <div class="card-header bg-transparent border-secondary-subtle">
-      <h5 class="mb-0"><i class="bi bi-clipboard-check text-primary me-2"></i>What Redline tests</h5>
-    </div>
-    <div class="card-body">
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="d-flex gap-3 mb-2">
-            <i class="bi bi-speedometer2 text-info fs-5 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Performance &amp; Availability</div>
-              <div class="text-secondary small">Stress load, rate limit bypass — does your site hold up under pressure?</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex gap-3 mb-2">
-            <i class="bi bi-shield-lock text-success fs-5 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Transport &amp; Browser Protection</div>
-              <div class="text-secondary small">SSL/TLS, security headers, clickjacking, cookie flags — are browsers protected?</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex gap-3 mb-2">
-            <i class="bi bi-bug text-danger fs-5 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Injection &amp; Input Handling</div>
-              <div class="text-secondary small">SQL injection, XSS, open redirect — do you handle untrusted input safely?</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex gap-3 mb-2">
-            <i class="bi bi-door-open text-warning fs-5 mt-1"></i>
-            <div>
-              <div class="fw-semibold">Access &amp; API Surface</div>
-              <div class="text-secondary small">Endpoint discovery, CORS, CSRF — what can an attacker reach that they shouldn't?</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Main testing card -->
-<div class="container mb-5" style="max-width: 980px;">
-  <div class="card border-primary shadow-sm">
-    <div class="card-header bg-transparent border-secondary-subtle d-flex align-items-center gap-2">
-      <i class="bi bi-play-circle text-primary fs-5"></i>
-      <h5 class="mb-0">Start Testing</h5>
-    </div>
-    <div class="card-body">
+    <div class="card-body p-4">
 
       <label for="domain" class="form-label fw-semibold">
         <i class="bi bi-globe me-1"></i>Website Domain
       </label>
-      <div class="input-group input-group-lg mb-1">
-        <input type="text" id="domain" class="form-control" placeholder="example.com"
-               autocomplete="off" spellcheck="false" />
-        <button class="btn btn-primary" id="verifyBtn" type="button">
-          <i class="bi bi-shield-check me-1"></i>Verify Domain Ownership
-        </button>
-      </div>
-      <div class="form-text">Enter your domain without http:// or https://</div>
+      <input type="text" id="domain" class="form-control form-control-lg mb-1" placeholder="example.com"
+             autocomplete="off" spellcheck="false" />
+      <div class="form-text mb-3">Enter your domain without http:// or https://</div>
 
-      <div id="verifyAlert" class="mt-3"></div>
+      <div id="verifyAlert"></div>
 
-      <!-- Verification instructions -->
-      <div id="verifyPanel" class="card bg-body-tertiary border-secondary-subtle mt-3 d-none">
+      <!-- Domain Verification panel (always visible) -->
+      <div id="verifyPanel" class="card bg-body-tertiary border-secondary-subtle">
+        <div class="card-header bg-transparent border-secondary-subtle d-flex align-items-center gap-2">
+          <i class="bi bi-shield-lock text-warning fs-5"></i>
+          <h5 class="mb-0">Domain Verification</h5>
+        </div>
         <div class="card-body">
-          <h6 class="d-flex align-items-center gap-2">
-            <i class="bi bi-shield-lock text-warning"></i>Step 1 — Prove you own this domain
-          </h6>
-          <p class="text-secondary mb-2">
-            Add this one-liner to your homepage's <code>&lt;head&gt;</code> section, deploy it, then
-            come back and click <strong>Verify Domain Ownership</strong>.
+          <p class="text-secondary mb-3">
+            To prevent abuse, you must verify domain ownership by adding this meta tag to your
+            website's <code>&lt;head&gt;</code> section:
           </p>
           <pre class="bg-dark border border-secondary-subtle rounded p-3 mb-3"><code>&lt;meta name="breakmysite" content="verified"&gt;</code></pre>
-          <div class="accordion accordion-flush" id="howto">
-            <div class="accordion-item bg-transparent">
+
+          <div class="accordion accordion-flush mb-3" id="howto">
+            <div class="accordion-item bg-transparent border border-secondary-subtle rounded">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed bg-transparent" type="button"
                         data-bs-toggle="collapse" data-bs-target="#howtoBody">
@@ -175,8 +64,7 @@
                     <div class="col-md-6">
                       <div class="card border-secondary-subtle p-3 h-100">
                         <div class="d-flex align-items-center gap-2 mb-2">
-                          <i class="bi bi-wordpress text-secondary fs-5"></i>
-                          <strong>WordPress</strong>
+                          <i class="bi bi-wordpress text-secondary fs-5"></i><strong>WordPress</strong>
                         </div>
                         <ol class="text-secondary small mb-0">
                           <li>Go to Appearance → Theme Editor</li>
@@ -189,8 +77,7 @@
                     <div class="col-md-6">
                       <div class="card border-secondary-subtle p-3 h-100">
                         <div class="d-flex align-items-center gap-2 mb-2">
-                          <i class="bi bi-filetype-html text-secondary fs-5"></i>
-                          <strong>HTML/Static Sites</strong>
+                          <i class="bi bi-filetype-html text-secondary fs-5"></i><strong>HTML/Static Sites</strong>
                         </div>
                         <ol class="text-secondary small mb-0">
                           <li>Open your <code>index.html</code> file</li>
@@ -203,8 +90,7 @@
                     <div class="col-md-6">
                       <div class="card border-secondary-subtle p-3 h-100">
                         <div class="d-flex align-items-center gap-2 mb-2">
-                          <i class="bi bi-bootstrap text-secondary fs-5"></i>
-                          <strong>React / Vue / Angular</strong>
+                          <i class="bi bi-bootstrap text-secondary fs-5"></i><strong>React/Vue/Angular</strong>
                         </div>
                         <ol class="text-secondary small mb-0">
                           <li>Open <code>public/index.html</code></li>
@@ -216,8 +102,7 @@
                     <div class="col-md-6">
                       <div class="card border-secondary-subtle p-3 h-100">
                         <div class="d-flex align-items-center gap-2 mb-2">
-                          <i class="bi bi-cloud text-secondary fs-5"></i>
-                          <strong>Hosting Panels</strong>
+                          <i class="bi bi-cloud text-secondary fs-5"></i><strong>Hosting Panels</strong>
                         </div>
                         <ol class="text-secondary small mb-0">
                           <li>Log into cPanel/hosting dashboard</li>
@@ -229,8 +114,8 @@
                     </div>
                   </div>
 
-                  <div class="alert alert-warning-subtle border border-warning-subtle rounded p-3 mb-0">
-                    <p class="fw-semibold small mb-2 text-warning">Example: Your <code>&lt;head&gt;</code> section should look like this:</p>
+                  <div class="border border-warning-subtle bg-warning-subtle rounded p-3 mb-0">
+                    <p class="fw-semibold small mb-2">Example: Your <code>&lt;head&gt;</code> section should look like this:</p>
                     <pre class="bg-dark rounded p-3 mb-0 small"><code>&lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
   &lt;title&gt;My Website&lt;/title&gt;
@@ -242,27 +127,30 @@
               </div>
             </div>
           </div>
+
+          <button class="btn btn-outline-warning" id="verifyBtn" type="button">
+            <i class="bi bi-shield-check me-1"></i>Verify Domain Ownership
+          </button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Test selection (shown after verification) -->
-  <div id="testPanel" class="card border-secondary-subtle shadow-sm mt-3 d-none">
-    <div class="card-header bg-transparent border-secondary-subtle d-flex align-items-center justify-content-between">
+  <div id="testPanel" class="card border-secondary-subtle shadow-sm mb-4 d-none">
+    <div class="card-header bg-transparent border-secondary-subtle d-flex align-items-center justify-content-between py-3">
       <span class="d-flex align-items-center gap-2">
-        <i class="bi bi-list-check text-primary fs-5"></i>
-        <h5 class="mb-0">Select Tests to Run</h5>
+        <i class="bi bi-list-check text-primary fs-4"></i>
+        <h4 class="mb-0 fw-bold">Select Tests to Run</h4>
       </span>
       <button class="btn btn-sm btn-outline-secondary" type="button" id="selectAllBtn">Select all</button>
     </div>
-    <div class="card-body">
+    <div class="card-body p-4">
       <div class="alert alert-info d-flex gap-2" role="alert">
-        <i class="bi bi-info-circle-fill flex-shrink-0"></i>
+        <i class="bi bi-info-circle-fill flex-shrink-0 mt-1"></i>
         <div>
           <strong>All tests are non-destructive.</strong> Run a focused set or select everything —
           a full pass on every test is required to earn the Redline endorsement.
-          Tests marked "intensive" probe multiple paths.
         </div>
       </div>
 
@@ -305,10 +193,8 @@
       </button>
     </div>
   </div>
-</div>
 
-<!-- Results -->
-<div class="container mb-5" style="max-width: 980px;">
+  <!-- Results -->
   <div id="results"></div>
 </div>
 
