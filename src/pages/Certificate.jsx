@@ -12,11 +12,15 @@ export default function Certificate() {
           display the Redline verified badge.
         </p>
 
-        <div style={{ margin: '24px 0' }}>
-          <span className="cert-badge">
-            <span className="ring" />
-            Redline Verified
-          </span>
+        <div className="cert-hero">
+          <div className="cert-medallion">
+            <div className="cert-medallion-ring" />
+            <div className="cert-medallion-core">
+              <span className="cert-check">✓</span>
+              <span className="cert-word">REDLINE</span>
+              <span className="cert-sub">VERIFIED</span>
+            </div>
+          </div>
         </div>
 
         <h2>How to earn it</h2>
@@ -60,26 +64,29 @@ export default function Certificate() {
 
         <h2>Badge snippet</h2>
         <p className="muted">
-          Once eligible, embed this on your site. Replace{' '}
-          <code>yourdomain.com</code> with your verified domain.
+          Your embed code is sealed until a domain completes a passing scan.
+          Earn it — don&apos;t copy it.
         </p>
-        <pre
-          style={{
-            background: 'var(--bg)',
-            border: '1px solid var(--border-soft)',
-            borderRadius: 8,
-            padding: '12px 14px',
-            overflowX: 'auto',
-            fontFamily: 'var(--mono)',
-            fontSize: '0.82rem',
-          }}
-        >
-          {`<a href="https://redline.scan/r/yourdomain.com"
+        <div className="locked-embed">
+          <pre aria-hidden="true">
+            {`<a href="https://redline.scan/r/••••••••••"
    rel="noopener" target="_blank">
-  <img src="https://redline.scan/badge/yourdomain.com.svg"
+  <img src="https://redline.scan/badge/•••••••.svg"
        alt="Redline Verified" width="160" height="40" />
 </a>`}
-        </pre>
+          </pre>
+          <div className="locked-overlay">
+            <div className="lock-glyph">🔒</div>
+            <strong>Embed code locked</strong>
+            <span className="muted">
+              Unlocks automatically in your report the moment a scan passes the
+              baseline.
+            </span>
+            <Link to="/" className="btn btn-primary" style={{ marginTop: 4 }}>
+              Run a scan to unlock
+            </Link>
+          </div>
+        </div>
 
         <h2>What the badge means — and doesn&apos;t</h2>
         <ul>

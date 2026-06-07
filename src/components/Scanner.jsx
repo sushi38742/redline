@@ -212,6 +212,39 @@ export default function Scanner() {
   )
 }
 
+function BadgeReward({ domain }) {
+  const [copied, setCopied] = useState(false)
+  const snippet = `<a href="https://redline.scan/r/${domain}" rel="noopener" target="_blank">
+  <img src="https://redline.scan/badge/${domain}.svg"
+       alt="Redline Verified" width="160" height="40" />
+</a>`
+  return (
+    <div className="badge-reward">
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ fontSize: '1.4rem' }}>🎖️</span>
+        <strong>
+          Badge unlocked — {domain} passed the baseline with no critical or high
+          findings.
+        </strong>
+      </div>
+      <p className="muted" style={{ margin: '8px 0 0', fontSize: '0.9rem' }}>
+        Your embed code is now yours. Drop it on your site:
+      </p>
+      <pre>{snippet}</pre>
+      <button
+        className="copy-btn"
+        onClick={() => {
+          navigator.clipboard?.writeText(snippet)
+          setCopied(true)
+          setTimeout(() => setCopied(false), 1800)
+        }}
+      >
+        {copied ? '✓ Copied' : 'Copy embed code'}
+      </button>
+    </div>
+  )
+}
+
 function Results({ result }) {
   const counts = SEVERITY_ORDER.reduce((acc, s) => {
     acc[s] = result.findings.filter((f) => f.severity === s).length
@@ -256,11 +289,17 @@ function Results({ result }) {
         ))}
       </div>
 
-      {result.badgeEligible ? (
+      {result.aiSummary && (
         <div className="notice ok">
-          🎖️ <strong>Badge eligible.</strong> This domain passed Redline&apos;s
-          published baseline with no critical or high findings at scan time.
+          <strong>✨ AI remediation summary</strong>
+          <div style={{ marginTop: 6, whiteSpace: 'pre-wrap' }}>
+            {result.aiSummary}
+          </div>
         </div>
+      )}
+
+      {result.badgeEligible ? (
+        <BadgeReward domain={result.domain} />
       ) : (
         <div className="notice">
           Not badge eligible yet — resolve the {actionable.length} open finding

@@ -767,22 +767,138 @@ code {
   font-size: 0.95rem;
 }
 
-.cert-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--green);
-  border-radius: 12px;
-  padding: 14px 20px;
-  font-weight: 600;
+/* Certificate medallion */
+.cert-hero {
+  display: flex;
+  justify-content: center;
+  margin: 36px 0 8px;
 }
-.cert-badge .ring {
-  width: 22px;
-  height: 22px;
-  border: 3px solid var(--green);
+.cert-medallion {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: grid;
+  place-items: center;
+}
+.cert-medallion-ring {
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  display: inline-block;
+  background: conic-gradient(
+    from 0deg,
+    var(--red),
+    var(--violet),
+    var(--cyan),
+    var(--pink),
+    var(--red)
+  );
+  filter: blur(2px);
+  animation: spin 8s linear infinite;
+  box-shadow: 0 0 50px -6px rgba(139, 92, 255, 0.6);
+}
+.cert-medallion-ring::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+.cert-medallion-core {
+  position: relative;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 30%, #1c1c2c, #101018);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.cert-check {
+  font-size: 2.4rem;
+  line-height: 1;
+  background: var(--grad-cool);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(255, 59, 92, 0.5));
+}
+.cert-word {
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+.cert-sub {
+  font-size: 0.66rem;
+  letter-spacing: 0.42em;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+/* Locked embed */
+.locked-embed {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.locked-embed pre {
+  margin: 0;
+  filter: blur(5px);
+  user-select: none;
+  opacity: 0.5;
+}
+.locked-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  padding: 16px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(20, 20, 31, 0.6),
+    rgba(11, 11, 18, 0.86)
+  );
+  backdrop-filter: blur(2px);
+}
+.lock-glyph {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 0 14px rgba(139, 92, 255, 0.7));
+}
+
+/* Unlocked badge reward (shown in a passing report) */
+.badge-reward {
+  border: 1px solid color-mix(in srgb, var(--green) 50%, var(--border));
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 10px;
+  background: linear-gradient(180deg, rgba(47, 212, 123, 0.08), transparent);
+}
+.badge-reward pre {
+  margin: 10px 0 0;
+}
+.copy-btn {
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-elev);
+  color: var(--text);
+  padding: 7px 14px;
+  margin-top: 10px;
+}
+.copy-btn:hover {
+  border-color: var(--green);
 }
 
 table.cmp {

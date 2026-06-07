@@ -4,8 +4,21 @@ import { fileURLToPath } from 'node:url'
 import fs from 'node:fs'
 import { tokenFor, verifyOwnership } from './verify.js'
 import { scan } from './scanner.js'
+import { summarizeFindings, aiEnabled } from './lib/ai.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+// Load .env (git-ignored) without a dependency, if present.
+const envPath = path.join(__dirname, '..', '.env')
+if (fs.existsSync(envPath)) {
+  for (const line of fs.readFileSync(envPath, 'utf8').split('\n')) {
+    const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/i)
+    if (m && !(m[1] in process.env)) {
+      process.env[m[1]] = m[2].replace(/^["']|["']$/g, '')
+    }
+  }
+}
+
 const app = express()
 app.use(express.json({ limit: '64kb' }))
 
@@ -84,13 +97,16 @@ app.post('/api/scan', rateLimit, async (req, res) => {
 
   try {
     const result = await scan(domain)
+    result.aiSummary = await summarizeFindings(domain, result.findings)
     res.json(result)
   } catch (err) {
     res.status(500).json({ error: 'Scan failed: ' + err.message })
   }
 })
 
-app.get('/api/health', (_req, res) => res.json({ ok: true }))
+app.get('/api/health', (_req, res) =>
+  res.json({ ok: true, aiEnabled: aiEnabled() }),
+)
 
 // --- serve the built SPA in production ---
 const dist = path.join(__dirname, '..', 'dist')
