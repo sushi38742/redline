@@ -5,6 +5,7 @@ import {
   runScan,
   normalizeDomain,
   isValidDomain,
+  isExemptDomain,
   EngineUnavailableError,
 } from '../lib/api.js'
 import { clientScan } from '../lib/clientScan.js'
@@ -28,6 +29,7 @@ export default function Scanner() {
 
   const clean = normalizeDomain(domain)
   const valid = isValidDomain(clean)
+  const exempt = isExemptDomain(clean)
 
   async function onStartVerify(e) {
     e.preventDefault()
@@ -35,7 +37,12 @@ export default function Scanner() {
     setNotice(null)
     setResult(null)
     if (!valid) {
-      setError('Enter a valid domain, e.g. example.com')
+      setError('Enter a valid domain, e.g. yourdomain.com')
+      return
+    }
+    // Pre-cleared domains skip verification and scan immediately.
+    if (exempt) {
+      await onScan()
       return
     }
     setStage('verifying')
@@ -137,7 +144,11 @@ export default function Scanner() {
             className="btn btn-primary"
             disabled={stage === 'verifying'}
           >
-            {stage === 'verifying' ? 'Generating…' : 'Verify ownership'}
+            {stage === 'verifying'
+              ? 'Generating…'
+              : exempt
+                ? 'Run controlled scan'
+                : 'Verify & scan'}
           </button>
         ) : (
           <button
@@ -156,6 +167,19 @@ export default function Scanner() {
           </button>
         )}
       </form>
+
+      {stage === 'idle' && (
+        <p className="scan-hint">
+          {exempt ? (
+            <>✓ {clean} is pre-cleared — no verification needed.</>
+          ) : (
+            <>
+              🔒 Redline only scans domains you own. You&apos;ll prove ownership
+              first — it takes about a minute.
+            </>
+          )}
+        </p>
+      )}
 
       {error && <div className="notice error">{error}</div>}
       {notice && <div className="notice ok">{notice}</div>}

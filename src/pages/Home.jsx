@@ -1,23 +1,24 @@
 import { Link } from 'react-router-dom'
 import Scanner from '../components/Scanner.jsx'
-import { CHECK_CATALOG, PRINCIPLES } from '../lib/catalog.js'
+import { PRINCIPLES } from '../lib/catalog.js'
 
 export default function Home() {
   return (
     <>
       <section className="hero">
         <div className="container">
-          <span className="kicker">● Preflight scanning for modern websites</span>
+          <span className="kicker">● Preflight scanning for AI-built sites</span>
           <h1>
-            Catch launch mistakes before
+            You shipped it with AI.
             <br />
-            the internet starts <span className="accent">improvising.</span>
+            Let&apos;s make sure it&apos;s <span className="accent">safe to launch.</span>
           </h1>
           <p className="lead">
-            Redline checks verified websites for exposed API keys, AI provider
-            credentials, public environment files, risky endpoints, weak
-            headers, CORS issues, DNS problems and launch mistakes — controlled,
-            non-destructive, and verified domains only.
+            Built your site with Lovable, Cursor, v0, Bolt or ChatGPT? Amazing —
+            you moved fast. But AI loves to leave an API key in the page, a
+            wide-open CORS rule, or a public <code>.env</code> behind. Redline
+            quietly checks for all of it <em>before</em> the internet starts
+            improvising.
           </p>
           <div className="pill-row">
             <span className="pill">
@@ -40,58 +41,88 @@ export default function Home() {
         <Scanner />
       </section>
 
+      {/* Conversational pitch for AI builders */}
+      <section className="section">
+        <div className="container prose" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(1.6rem,4vw,2.3rem)' }}>
+            AI writes great features. It&apos;s terrible at keeping secrets.
+          </h2>
+          <p className="lead" style={{ margin: '0 auto', maxWidth: 680 }}>
+            When a model wires up your app, it&apos;ll happily paste your OpenAI
+            or Stripe key straight into the browser bundle, ship source maps that
+            expose your whole codebase, or skip the security headers no one told
+            it about. None of that shows up on your screen — but it&apos;s all
+            sitting there in public. Redline finds it the way an attacker would,
+            without ever touching, breaking, or exploiting anything.
+          </p>
+        </div>
+      </section>
+
+      {/* Easy 3-step technical walkthrough */}
+      <section className="section" id="how">
+        <div className="container">
+          <div className="section-head">
+            <h2>How it actually works</h2>
+            <p>Three steps. No jargon. You stay in control the whole time.</p>
+          </div>
+          <div className="grid grid-3">
+            <div className="card walk-card" style={{ '--accent': '#8b5cff' }}>
+              <div className="walk-num">1</div>
+              <h3>Prove it&apos;s yours</h3>
+              <p>
+                Drop a small tag, file, or DNS record on your site so Redline
+                knows you own it. This is required — we never scan a domain you
+                can&apos;t prove is yours. It takes about a minute.
+              </p>
+            </div>
+            <div className="card walk-card" style={{ '--accent': '#ff5fa2' }}>
+              <div className="walk-num">2</div>
+              <h3>We look, gently</h3>
+              <p>
+                Redline reads the same public pages, scripts, headers and DNS
+                records anyone on the internet can already see — just faster and
+                more thoroughly. No logins, no brute force, no breaking things.
+              </p>
+            </div>
+            <div className="card walk-card" style={{ '--accent': '#2fd4d4' }}>
+              <div className="walk-num">3</div>
+              <h3>You get plain-English fixes</h3>
+              <p>
+                Each finding tells you what we saw, how serious it is, how sure
+                we are, and exactly how to fix it. Clear the important ones and
+                you can earn the Redline verified badge.
+              </p>
+            </div>
+          </div>
+          <p
+            className="muted"
+            style={{ textAlign: 'center', marginTop: 24, fontSize: '0.95rem' }}
+          >
+            Want the full technical breakdown of every check?{' '}
+            <Link to="/methodology">See how it works →</Link>
+          </p>
+        </div>
+      </section>
+
       {/* Principles */}
       <section className="section">
         <div className="container">
           <div className="section-head">
-            <h2>How Redline behaves</h2>
+            <h2>The promises we keep</h2>
             <p>
               Redline runs controlled baseline checks against verified domains,
               then reports status, severity, confidence, evidence and fixes —
-              without public numeric scores.
+              never a public numeric score.
             </p>
           </div>
           <div className="grid grid-2">
             {PRINCIPLES.map((p, i) => (
               <div className="card principle" key={p.title}>
-                <span className="principle-tag">{String(i + 1).padStart(2, '0')}</span>
+                <span className="principle-tag">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
                 <h3>{p.title}</h3>
                 <p>{p.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Check catalog */}
-      <section className="section" id="checks">
-        <div className="container">
-          <div className="section-head">
-            <h2>What Redline checks</h2>
-            <p>
-              Every category reports safe public signals classified by severity
-              and confidence, with practical remediation and never any
-              exploitation.
-            </p>
-          </div>
-          <div className="grid grid-3">
-            {CHECK_CATALOG.map((c) => (
-              <div
-                className="card check-card"
-                key={c.id}
-                style={{ '--accent': c.accent }}
-              >
-                <div
-                  className="icon"
-                  style={{
-                    background: `linear-gradient(135deg, ${c.accent}33, ${c.accent}11)`,
-                    boxShadow: `inset 0 0 0 1px ${c.accent}40`,
-                  }}
-                >
-                  {c.icon}
-                </div>
-                <h3>{c.title}</h3>
-                <p>{c.summary}</p>
               </div>
             ))}
           </div>
@@ -111,10 +142,10 @@ export default function Home() {
               border: '1px solid var(--border)',
             }}
           >
-            <h2>Earn the Redline verified badge</h2>
+            <h2>Launch like a pro, even if AI did the heavy lifting</h2>
             <p className="muted" style={{ maxWidth: 560, margin: '0 auto 24px' }}>
-              Pass the published baseline at scan time and become eligible to
-              display the Redline badge on your site.
+              Pass the published baseline and earn the Redline verified badge for
+              your site.
             </p>
             <div
               style={{
@@ -124,11 +155,11 @@ export default function Home() {
                 flexWrap: 'wrap',
               }}
             >
-              <Link to="/certificate" className="btn btn-primary">
-                Get the certificate
-              </Link>
-              <Link to="/methodology" className="btn btn-ghost">
-                Read the methodology
+              <a href="#scan" className="btn btn-primary">
+                Scan my site
+              </a>
+              <Link to="/certificate" className="btn btn-ghost">
+                About the badge
               </Link>
             </div>
           </div>

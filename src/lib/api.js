@@ -50,6 +50,13 @@ export function normalizeDomain(input) {
   return v
 }
 
+// Domains pre-cleared with Redline that may scan without the verification step.
+export const EXEMPT_DOMAINS = ['collegeconnekt.com', 'dailyfracture.com']
+
+export function isExemptDomain(d) {
+  return EXEMPT_DOMAINS.includes(d)
+}
+
 export function isValidDomain(d) {
   return /^(?=.{1,253}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/.test(
     d,

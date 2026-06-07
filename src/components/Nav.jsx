@@ -27,10 +27,7 @@ export default function Nav() {
             Scan
           </NavLink>
           <NavLink to="/methodology" onClick={close}>
-            Methodology
-          </NavLink>
-          <NavLink to="/verify" onClick={close}>
-            Verify domain
+            How it works
           </NavLink>
           <NavLink to="/certificate" onClick={close}>
             Certificate
