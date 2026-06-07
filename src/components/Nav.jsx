@@ -30,7 +30,7 @@ export default function Nav() {
             How it works
           </NavLink>
           <NavLink to="/certificate" onClick={close}>
-            Certificate
+            Partner Program
           </NavLink>
           <NavLink to="/legal" onClick={close}>
             Legal

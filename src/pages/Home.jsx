@@ -142,10 +142,11 @@ export default function Home() {
               border: '1px solid var(--border)',
             }}
           >
-            <h2>Launch like a pro, even if AI did the heavy lifting</h2>
-            <p className="muted" style={{ maxWidth: 560, margin: '0 auto 24px' }}>
-              Pass the published baseline and earn the Redline verified badge for
-              your site.
+            <h2>Pass the scan, become a Redline Partner</h2>
+            <p className="muted" style={{ maxWidth: 580, margin: '0 auto 24px' }}>
+              Clear the published baseline and you join the Redline Partner
+              Program — earning a badge that shows visitors your site was checked
+              for the launch mistakes AI tools love to leave behind.
             </p>
             <div
               style={{

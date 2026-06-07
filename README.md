@@ -30,15 +30,29 @@ To bypass the verification gate while testing locally:
 REDLINE_ALLOW_UNVERIFIED=1 npm run dev:api
 ```
 
-## Build & run in production
+## Deploy (keep the engine online)
+
+The scanner needs a live backend — a static-only deploy will fall back to a
+DNS-only browser preview. Two supported ways to run the real engine:
+
+### Option A — Serverless (Vercel, zero server to manage)
+
+The repo ships serverless functions in `api/` plus `vercel.json`. Import the
+repo into Vercel and it builds the Vite app and serves `/api/*` as functions
+automatically — the engine is always online. Set env vars in the Vercel
+dashboard:
+
+- `REDLINE_SECRET` — required, signs verification tokens
+- `GROQ_API_KEY` — optional, enables AI remediation summaries
+
+### Option B — Single Node service (any host)
 
 ```bash
 npm run build      # outputs dist/
 npm start          # Express serves the API + the built SPA on PORT (8787)
 ```
 
-Set `REDLINE_SECRET` in production so verification tokens are not the dev
-default.
+Set `REDLINE_SECRET` (and optionally `GROQ_API_KEY`) in the environment.
 
 ## How it works
 

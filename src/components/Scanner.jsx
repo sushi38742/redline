@@ -67,7 +67,7 @@ export default function Scanner() {
       setResult(data)
       setStage('done')
       setNotice(
-        'Scan engine offline — ran a DNS-only preview in your browser. Start the Redline engine for the full non-destructive baseline.',
+        'Showing a quick DNS-only preview while the full scan engine spins up. Refresh in a moment for the complete non-destructive baseline (secrets, headers, CORS, source maps and more).',
       )
     } catch (err) {
       setError('Preview scan failed: ' + err.message)

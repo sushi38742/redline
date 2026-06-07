@@ -2,9 +2,7 @@ import express from 'express'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs'
-import { tokenFor, verifyOwnership } from './verify.js'
-import { scan } from './scanner.js'
-import { summarizeFindings, aiEnabled } from './lib/ai.js'
+import { health, verifyStart, verifyCheck, runScan } from './core.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -40,84 +38,16 @@ function rateLimit(req, res, next) {
   next()
 }
 
-const DOMAIN_RE =
-  /^(?=.{1,253}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/
+const send = (res, r) => res.status(r.status).json(r.body)
+const allowUnverified = process.env.REDLINE_ALLOW_UNVERIFIED === '1'
 
-function cleanDomain(input) {
-  return String(input || '')
-    .trim()
-    .toLowerCase()
-    .replace(/^https?:\/\//, '')
-    .replace(/\/.*$/, '')
-    .replace(/:\d+$/, '')
-}
-
-app.post('/api/verify/start', rateLimit, (req, res) => {
-  const domain = cleanDomain(req.body?.domain)
-  if (!DOMAIN_RE.test(domain)) return res.status(400).json({ error: 'Invalid domain.' })
-  res.json({ domain, token: tokenFor(domain) })
-})
-
-app.post('/api/verify/check', rateLimit, async (req, res) => {
-  const domain = cleanDomain(req.body?.domain)
-  const method = req.body?.method
-  if (!DOMAIN_RE.test(domain)) return res.status(400).json({ error: 'Invalid domain.' })
-  if (!['meta', 'wellknown', 'dns'].includes(method))
-    return res.status(400).json({ error: 'Invalid verification method.' })
-  try {
-    const result = await verifyOwnership(domain, method)
-    res.json(result)
-  } catch (err) {
-    res.status(500).json({ error: 'Verification failed: ' + err.message })
-  }
-})
-
-app.post('/api/scan', rateLimit, async (req, res) => {
-  const domain = cleanDomain(req.body?.domain)
-  if (!DOMAIN_RE.test(domain)) return res.status(400).json({ error: 'Invalid domain.' })
-
-  // Pre-cleared domains are exempt from the verification gate.
-  const EXEMPT = ['collegeconnekt.com', 'dailyfracture.com']
-  if (EXEMPT.includes(domain)) {
-    try {
-      const result = await scan(domain)
-      result.aiSummary = await summarizeFindings(domain, result.findings)
-      return res.json(result)
-    } catch (err) {
-      return res.status(500).json({ error: 'Scan failed: ' + err.message })
-    }
-  }
-
-  // Re-check ownership immediately before scanning. Any verified method passes.
-  const methods = ['meta', 'wellknown', 'dns']
-  let verified = false
-  for (const m of methods) {
-    try {
-      const r = await verifyOwnership(domain, m)
-      if (r.verified) {
-        verified = true
-        break
-      }
-    } catch { /* try next method */ }
-  }
-  if (!verified && process.env.REDLINE_ALLOW_UNVERIFIED !== '1') {
-    return res.status(403).json({
-      error:
-        'Domain ownership is not verified. Complete meta tag, well-known file, or DNS TXT verification first.',
-    })
-  }
-
-  try {
-    const result = await scan(domain)
-    result.aiSummary = await summarizeFindings(domain, result.findings)
-    res.json(result)
-  } catch (err) {
-    res.status(500).json({ error: 'Scan failed: ' + err.message })
-  }
-})
-
-app.get('/api/health', (_req, res) =>
-  res.json({ ok: true, aiEnabled: aiEnabled() }),
+app.get('/api/health', (_req, res) => send(res, health()))
+app.post('/api/verify/start', rateLimit, (req, res) => send(res, verifyStart(req.body)))
+app.post('/api/verify/check', rateLimit, async (req, res) =>
+  send(res, await verifyCheck(req.body)),
+)
+app.post('/api/scan', rateLimit, async (req, res) =>
+  send(res, await runScan(req.body, { allowUnverified })),
 )
 
 // --- serve the built SPA in production ---
